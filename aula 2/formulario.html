@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulário</title>
+</head>
+<body>
+
+<form action="" method="POST">
+
+  <div class="input-linha">
+    <label for="nome">Nome e Sobrenome *</label>
+    <div>
+      <input type="text" name="nome" id="nome" required role=>
+      <input type="text" name="sobrenome" id="sobrenome" required>
+    </div>
+  </div>
+
+  <div class="input-unico">
+    <label for="empresa">Empresa</label>
+    <div>
+      <input type="text" name="empresa" id="empresa">
+    </div>
+  </div>
+
+  <div class="input-unico">
+    <label for="email">Email *</label>
+    <div>
+      <input type="email" name="email" id="email" required>
+    </div>
+  </div>
+
+  <div class="input-linha">
+    <label for="ddd">DDD e Telefone *</label>
+    <div>
+      <input type="text" name="ddd" id="ddd" required maxlength="5">
+      <input type="tel" name="telefone" id="telefone" required>
+    </div>
+  </div>
+
+  <div class="input-unico">
+    <label for="genero">Genero *</label>
+    <div>
+      <select name="genero" id="genero">
+        <option value="M">Masculino</option>
+        <option value="F">Feminino</option>
+        <option value="">Prefiro não informar</option>
+      </select>
+    </div>
+  </div>
+  <button type="submit">Enviar</button>
+</form>
+  
+</body>
+</html>
+
+http://127.0.0.1:5500/aula%202/formulario.html?nome=Victor&sobrenome=Menezes&empresa=&email=victor%40gmail.com&ddd=11&telefone=99999999&genero=M
