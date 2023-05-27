@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Javascript</title>
+</head>
+<body>
+
+<button id="mais" onclick="incrementar()">+</button>
+<p class="contagem">0</p>
+<button>-</button>
+
+  <script>
+  let botaoMais = document.getElementById("mais");
+  let botaoMenos = document.querySelector('button:last-of-type')
+  let numero = document.querySelector('.contagem')
+
+  let count = 0;
+  
+
+  function incrementar(){
+    count++;
+    numero.innerText = count
+    botaoMenos.style.backgroundColor = "red"
+  }
+
+  const decrementar = () => {
+    if(count == 0 ) return
+    count--;
+    numero.innerText = count
+    botaoMenos.style.backgroundColor = "green"
+  }
+
+botaoMenos.onclick = decrementar;
+
+//   // var nome = "Victor"; -> não recomendado
+//   // var nome = 1;
+
+
+//   let nome = "Victor";
+//   const sobrenome = "Menezes";
+
+// let numero  = 0
+// do {
+//   console.log(`oi ${numero}`)
+//   numero++;
+// }while(numero < 1)
+
+// // for
+// for(let i = 0; i<10 ; i++) {
+//     console.log(`oi ${i + 1}`)
+//   }
+
+//   // while
+
+//   let numero2  = 0
+//   while(numero2 < 5) {
+//     numero2++;
+//     console.log("oi")
+//   }
+
+
+//   // if
+//   let idade = 18
+//   let acompanhado = false
+
+//   // true + false = false
+//   // false + true = false
+//   if(idade < 18 && !acompanhado) {
+//     console.log("não pode ver o filme")
+//   }else {
+//     console.log("pode ver o filme")
+//   }
+  </script>
+</body>
+</html>
