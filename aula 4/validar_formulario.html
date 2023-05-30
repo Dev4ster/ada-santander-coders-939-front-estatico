@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Validar Formulário</title>
+  <style>
+    input.error {
+      border: 1px solid red;
+    }
+    input.success {
+      border: 1px solid green;
+    }
+    small.errorLabel {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <form action="" onsubmit="enviar(event);" name="cadastro">
+    <div>
+      <label for="nome">Nome Completo</label>
+      <input type="text" name="nome" id="nome">
+    </div>
+    <div>
+      <label for="idade">idade</label>
+      <input type="tel" name="idade" id="idade">
+    </div>
+    <div>
+      <label for="email">email</label>
+      <input type="email" name="email" id="email">
+    </div>
+    <div>
+      <label for="data">Data de nascimento</label>
+      <input type="date" name="data" id="data">
+    </div>
+    <button type="submit">Enviar</button>
+  </form>
+
+  <script>
+
+    function cleanError(input) {
+      input.classList.remove('error')
+      input.classList.add('success')
+      input.parentElement.querySelector('small')?.remove()
+    }
+
+    function setError(input, msg) {
+      if(!input.classList.contains('error')) {
+        input.classList.remove('success')
+        input.classList.add('error')
+        const msgElement = document.createElement('small')
+        msgElement.innerText = msg;
+        msgElement.classList.add('errorLabel')
+        input.parentElement.appendChild(msgElement)
+      }
+    }
+
+    function validateNome(input) {
+      const [nomeInicial, sobrenome] = input.value.trim().split(' ')
+      if((!nomeInicial || nomeInicial.length < 2) || (!sobrenome || sobrenome.length < 2)) {
+        setError(input, 'Informe seu nome completo.')
+        return false
+      }
+        cleanError(input)
+        return true
+    }
+
+    function validateIdade(input) {
+      const idade = Number(input.value)
+      cleanError(input)
+      if(!idade || idade < 18) {
+        const msg = !idade ? 'Informe a idade.' : 'Idade menor que 18.'
+        setError(input, msg)
+        return false
+      }
+
+      cleanError(input)
+      return true
+    }
+
+    function validateEmail(input) {
+      const { value:emailValue } = input
+      cleanError(input)
+      if(!emailValue || emailValue.indexOf('gmail.com') == -1) {
+        const msg = !emailValue ? 'Informe o email.' : 'email precisa ser Gmail.'
+        setError(input, msg)
+        return false
+      }
+      cleanError(input)
+      return true
+    }
+
+    function validateData(input){
+        const data = new Date(input.value)
+
+        const anoAtual = new Date().getFullYear()
+        const mesAtual = new Date().getMonth() + 1
+        const diaAtual = new Date().getDate()
+        if(data == 'Invalid Date') {
+          setError(input, 'data inválida')
+          return 
+        }  
+        const anoNascimento = data.getFullYear() 
+        const mesNascimento = data.getMonth() + 1  
+        const diaNascimento = data.getDate()
+        
+        let quantosAnos = anoAtual - anoNascimento
+
+        if(mesAtual < mesNascimento || mesAtual == mesNascimento && diaAtual < diaNascimento) {
+          quantosAnos --;
+        }
+
+        if(quantosAnos < 18)  {
+          setError(input, 'precisa ser maior ou igual a 18')
+          return false
+        }
+
+        cleanError(input)
+        return true
+    }
+
+    function validade() {
+      const nome = document.forms['cadastro']['nome']
+      const idade = document.forms['cadastro']['idade']
+      const email = document.forms['cadastro']['email']
+      const data = document.forms['cadastro']['data']
+      validateNome(nome)
+      validateIdade(idade)
+      validateEmail(email)
+      validateData(data)
+
+      fetch('http://localhost/server.php', {
+        body: {
+          nome: nome.value,
+          idade: idade.value
+        },
+        method: "POST"
+      }).then(resposta => {
+        if(resposta.status === 200) {
+          // sucesso
+          return resposta.json()
+        }else {
+          // error
+        }
+      }).then(resposta => {
+        if(resposta.sucesso == true) {
+          alert("dados enviados!")
+        }
+      })
+    }
+
+    function enviar(e) {
+      e.preventDefault()
+      validade();
+
+
+    }
+    // document.getElementById('formulario').addEventListener('submit', enviar)
+  </script>
+</body>
+</html>

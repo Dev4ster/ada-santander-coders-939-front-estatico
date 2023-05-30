@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post List</title>
+</head>
+<body>
+  
+  <div id="posts">
+    
+  </div>
+
+  <script> 
+
+    // Objeto javascript
+    const pessoa = {
+      nome: 'Victor',
+      idade: 26,
+      isBlack: true,
+      saldo: 100,
+      falar() {
+        console.log(`${this.nome} disse oi`)
+      },
+      aniversario() {
+        console.log(`parabéns ${this.nome}`)
+        this.idade++;
+      },
+      setSaldo(valor = 0) {
+        if(!!valor && typeof valor ==="number" && valor > 0) {
+          this.saldo = valor
+        }
+      }
+    }
+    
+
+    function loadPosts() {
+      fetch('https://jsonplaceholder.typicode.com/posts')
+      .then(res => res.json())
+      .then(res => createPosts(res))
+      .catch((error) => {
+        console.log("erro ao carregar dados", error)
+      })
+      .finally(() => {
+        console.log("terminou de carregar tudo")
+      })
+
+    }
+    
+    function createPost(post) {
+      const article = document.createElement('article')
+      const title = document.createElement('h2')
+      const content = document.createElement('p')
+      const separator = document.createElement('hr')
+
+      title.innerText = post.title
+      content.innerText = post.body
+      article.appendChild(title)
+      article.appendChild(separator)
+      article.appendChild(content)
+
+      document.getElementById('posts').appendChild(article)
+    }
+
+    function createPosts(posts = []) {
+      posts.forEach(post => {
+        createPost(post)
+      })
+    }
+
+   
+    window.onload = loadPosts;
+  </script>
+</body>
+</html>
