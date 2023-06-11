@@ -1,0 +1,102 @@
+.flex {
+  display: flex;
+}
+
+.flex-wrap {
+	flex-wrap: wrap;
+}
+
+.flex-item-1 {
+	flex: 1;
+}
+
+.item {
+	margin: 5px;
+	background: tomato;
+	text-align: center;
+	font-size: 19.5px;
+}
+
+.container {
+	max-width: 400px;
+	margin: 0 auto;
+	border: 1px solid #ccc;
+}
+
+h1 {
+	text-align: center;
+	margin: 20px 0 0 0;
+	font-size: 16.25px;
+	font-weight: normal;
+}
+
+body {
+	font-family: monospace;
+	color: #333;
+}
+
+/* aplicável apenas no pai dos elementos */
+.row {
+	flex-direction: row;
+}
+.row-reverse {
+	flex-direction: row-reverse;
+}
+.column {
+	flex-direction: column;
+}
+.column-reverse {
+	flex-direction: column-reverse;
+}
+
+
+/* aplicável apenas no pai dos elementos */
+.nowrap { /* padrao, valor inicial */
+	flex-wrap: nowrap; 
+}
+.wrap {
+	flex-wrap: wrap;
+}
+.wrap-reverse {
+	flex-wrap: wrap-reverse;
+}
+
+/* aplicável apenas no pai dos elementos */
+.flex-start { /* padrao, valor inicial */
+	justify-content: flex-start;
+}
+
+.flex-end {
+	justify-content: flex-end;
+}
+
+.center {
+	justify-content: center;
+}
+
+.space-between {
+	justify-content: space-between;
+}
+
+.space-around {
+	justify-content: space-around;
+}
+
+
+/* aplicável apenas no pai dos elementos */
+
+.a-flex-start {
+	align-items: flex-start;
+}
+
+.a-flex-end {
+	align-items: flex-end;
+}
+
+.a-center {
+	align-items: center;
+}
+
+.a-baseline {
+	align-items: baseline;
+}
